@@ -9,6 +9,7 @@ function getArray(payload) {
     payload?.leaderboard ||
     payload?.leaderboards ||
     payload?.players ||
+    payload?.leaderboardRows ||
     payload?.data?.leaderboard ||
     payload?.data?.leaderboards ||
     payload?.data?.players ||
