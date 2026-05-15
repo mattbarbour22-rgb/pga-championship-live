@@ -585,7 +585,17 @@ const aliasMap = {
 
   mfitzpatrick: 'mattfitzpatrick',
   mattfitzpatrick: 'mattfitzpatrick',
+  
+  griffin: 'bengriffin',
+  bengriffin: 'bengriffin',
 
+  goterup: 'chrisgotterup',
+  gotterup: 'chrisgotterup',
+  chrisgotterup: 'chrisgotterup',
+
+  nhojgaard: 'nicolaihojgaard',
+  nicolaihojgaard: 'nicolaihojgaard',
+  
   homa: 'maxhoma',
   maxhoma: 'maxhoma',
 
