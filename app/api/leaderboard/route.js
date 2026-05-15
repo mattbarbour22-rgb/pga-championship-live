@@ -105,7 +105,6 @@ export async function GET() {
         'x-rapidapi-key': key,
         'x-rapidapi-host': host,
       },
-      next: { revalidate: 3600 }
     });
 
     const text = await res.text();
