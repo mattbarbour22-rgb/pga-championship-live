@@ -595,6 +595,8 @@ const aliasMap = {
 
   nhojgaard: 'nicolaihojgaard',
   nicolaihojgaard: 'nicolaihojgaard',
+  højgaard: 'nicolaihojgaard',
+  hojgaard: 'nicolaihojgaard',
   
   homa: 'maxhoma',
   maxhoma: 'maxhoma',
