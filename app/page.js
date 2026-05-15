@@ -848,7 +848,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="note">Live rankings compare best current golf position, then next best, then third pick. Tied golf positions remain tied and move to the next comparison.</div>
+      <div className="note">Live rankings are decided by best current golf position, then next best and third pick. If no player has the tournament winner in their picks, the $1,750 prize jackpots.</div>
     </main>
   );
 }
