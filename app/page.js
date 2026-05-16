@@ -746,12 +746,84 @@ function evaluatePool(entries, players, previousRanks) {
     return { ...entry, rankLabel, numericRank: currentRank, move, moveClass };
   });
 }
+const round3BaselineRanks = {
+  "Shaw": 1,
+  "Lamming": 1,
+  "Muzza T": 3,
+  "Greg B": 3,
+  "Haycock Snr": 5,
+  "R Fowler": 6,
+  "JD Boy": 6,
+  "T Wallace": 8,
+  "Mal J": 9,
+  "Sparky": 9,
+  "Matt B": 9,
+  "Nick Fitz": 9,
+  "Kev Martin": 9,
+  "L Adams": 14,
+  "Pete Holly": 15,
+  "T Rowe": 15,
+  "G Ponting": 17,
+  "JB": 18,
+  "J Tilley": 18,
+  "K McGinness": 20,
+  "AD": 21,
+  "D Donnelly": 22,
+  "Enright": 23,
+  "Doc Campbell": 23,
+  "T Coleman": 23,
+  "D Haycock": 23,
+  "B Ashford": 23,
+  "Wazza SB": 23,
+  "Crusader": 23,
+  "K. Sanders": 23,
+  "Roche SES": 31,
+  "Kitch": 32,
+  "Mr Grant": 32,
+  "M Little": 32,
+  "Barty": 35,
+  "Brom": 35,
+  "Barley": 35,
+  "Lynda R": 35,
+  "Sir Steve": 35,
+  "P Langley": 40,
+  "J Turner": 40,
+  "Jonesy": 42,
+  "Mac The Knife": 42,
+  "The Wrangler": 44,
+  "D Tucker": 44,
+  "P Mac": 46,
+  "Trump H": 46,
+  "A Rose": 48,
+  "Hancock": 49,
+  "Bradley C": 49,
+  "A Bull": 51,
+  "J Barbour": 51,
+  "Sloanie": 53,
+  "Brian Irish": 54,
+  "R McKnight": 54,
+  "Arnie Palmer": 54,
+  "Baylis": 54,
+  "John Edge": 54,
+  "Trent W": 54,
+  "Cam P": 60,
+  "K Ferg": 61,
+  "D McCarthy": 61,
+  "Mr Manson": 61,
+  "M Sanders": 61,
+  "P Lund": 65,
+  "Timmy S": 66,
+  "Budgie": 66,
+  "Maccas": 66,
+  "Nath Ferg": 69,
+  "Chalkey": 70
+};
 
 export default function Home() {
   const [apiState, setApiState] = useState({ mode: 'loading', players: [], updatedAt: null, message: '' });
   const [poolExpanded, setPoolExpanded] = useState(false);
   const [golfExpanded, setGolfExpanded] = useState(false);
-  const previousRanks = useRef({});
+  const previousRanks = useRef(round3BaselineRanks);
 
   async function loadLeaderboard() {
     try {
