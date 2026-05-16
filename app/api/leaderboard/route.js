@@ -1,4 +1,4 @@
-export const revalidate = 3600;
+export const revalidate = 1800;
 
 const TOURN_ID = process.env.SLASH_GOLF_TOURN_ID || '033';
 const YEAR = process.env.SLASH_GOLF_YEAR || '2026';
