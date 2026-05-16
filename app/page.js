@@ -827,7 +827,7 @@ export default function Home() {
 
   async function loadLeaderboard() {
     try {
-      const res = await fetch('/api/leaderboard', { cache: 'no-store' });
+      const res = await fetch('/api/leaderboard');
       const data = await res.json();
       setApiState(data);
     } catch (err) {
