@@ -51,3 +51,14 @@ tr:nth-child(even) td { background: #f8fafc; }
   .logo { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.3); padding-bottom: 14px; }
   .big { font-size: 38px; }
 }
+.eliminated-row td {
+  opacity: 0.45;
+  background: #e5e7eb !important;
+}
+
+.eliminated-row .move-down {
+  opacity: 1;
+  color: #991b1b;
+  font-weight: 800;
+  font-size: 0.72rem;
+}
