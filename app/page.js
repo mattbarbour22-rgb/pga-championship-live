@@ -894,6 +894,8 @@ export default function Home() {
 
   const players = useMemo(() => addPositionLabels(apiState.players?.length ? apiState.players : fallbackPlayers), [apiState]);
   const pool = useMemo(() => {
+  return evaluatePool(poolEntries, players, round3BaselineRanks);
+}, [players]);
     const ranked = evaluatePool(poolEntries, players, previousRanks.current);
     const next = {};
     ranked.forEach(r => { next[r.player] = r.numericRank; });
