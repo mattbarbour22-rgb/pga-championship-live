@@ -896,12 +896,8 @@ export default function Home() {
   const pool = useMemo(() => {
   return evaluatePool(poolEntries, players, round3BaselineRanks);
 }, [players]);
-    const ranked = evaluatePool(poolEntries, players, previousRanks.current);
-    const next = {};
-    ranked.forEach(r => { next[r.player] = r.numericRank; });
-    previousRanks.current = next;
-    return ranked;
-  }, [players]);
+    
+
 
   const leader = pool[0];
   const poolLeaders = pool.filter(p => p.numericRank === pool[0]?.numericRank);
