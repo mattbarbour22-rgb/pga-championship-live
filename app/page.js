@@ -703,7 +703,38 @@ function buildMap(players) {
   players.forEach(p => map.set(keyName(p.name), p));
   return map;
 }
+function isLivePick(p) {
+  return p && p.position < 999 && posLabel(p) !== 'MC';
+}
 
+function comparePickSets(a, b) {
+  for (let i = 0; i < 3; i++) {
+    const av = a[i]?.position ?? 999;
+    const bv = b[i]?.position ?? 999;
+    if (av !== bv) return av - bv;
+  }
+  return 0;
+}
+
+function isDominated(entry, allEntries) {
+  const livePicks = entry.sortedPicks.filter(isLivePick);
+
+  if (livePicks.length === 3) return false;
+  if (livePicks.length === 0) return true;
+
+  return livePicks.every(winner => {
+    return allEntries.some(other => {
+      if (other.player === entry.player) return false;
+
+      const otherLive = other.sortedPicks.filter(isLivePick);
+      const otherHasWinner = otherLive.some(p => keyName(p.name) === keyName(winner.name));
+
+      if (!otherHasWinner) return false;
+
+      return comparePickSets(otherLive, livePicks) < 0;
+    });
+  });
+}
 function evaluatePool(entries, players, previousRanks) {
   const map = buildMap(players);
   const hasRealScores = players.some(p => p.thru && !String(p.thru).toLowerCase().includes('tee'));
@@ -732,7 +763,7 @@ function evaluatePool(entries, players, previousRanks) {
   let lastKey = null;
   let currentRank = 0;
 
-  return ranked.map((entry, index) => {
+  const rankedWithStatus = ranked.map((entry, index) => {
     const key = hasRealScores ? entry.sortedPicks.map(p => p.position).join('|') : String(index + 1);
     if (key !== lastKey) { currentRank = index + 1; lastKey = key; }
     const tieCount = hasRealScores ? ranked.filter(e => e.sortedPicks.map(p => p.position).join('|') === key).length : 1;
@@ -744,7 +775,31 @@ function evaluatePool(entries, players, previousRanks) {
       else if (currentRank > prev) { move = `▼ ${currentRank - prev}`; moveClass = 'move-down'; }
     }
     return { ...entry, rankLabel, numericRank: currentRank, move, moveClass };
-  });
+    });
+
+  const cutHasHappened = players.some(
+    p => p.position >= 999 || posLabel(p) === 'MC'
+  );
+
+  if (!cutHasHappened) {
+    return rankedWithStatus;
+  }
+
+  const alive = rankedWithStatus.filter(
+    entry => !isDominated(entry, rankedWithStatus)
+  );
+
+  const eliminated = rankedWithStatus
+    .filter(entry => isDominated(entry, rankedWithStatus))
+    .map(entry => ({
+      ...entry,
+      eliminated: true,
+      rankLabel: '',
+      move: 'ELIMINATED',
+      moveClass: 'move-down'
+    }));
+
+  return [...alive, ...eliminated];
 }
 const round3BaselineRanks = {
   "Shaw": 1,
@@ -907,7 +962,7 @@ export default function Home() {
                   const best = entry.sortedPicks[0], second = entry.sortedPicks[1], third = entry.sortedPicks[2];
                   const isBestLeading = best.position === players[0]?.position;
                   return (
-                    <tr key={entry.player} className={idx >= 12 ? 'hidden-row' : ''}>
+                    <tr key={entry.player} className={`${idx >= 12 ? 'hidden-row' : ''} ${entry.eliminated ? 'eliminated-row' : ''}`}>
                       <td>{entry.rankLabel}</td><td className={entry.moveClass}>{entry.move}</td><td className="player">{entry.player}</td>
                       <td className={isBestLeading ? 'green highlight' : ''}>{best.name} <span className="small">({posLabel(best)})</span></td>
                       <td>{second.name} <span className="small">({posLabel(second)})</span></td>
