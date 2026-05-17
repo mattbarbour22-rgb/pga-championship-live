@@ -893,7 +893,7 @@ export default function Home() {
             <div className="panel-title">Projected Pool Leader</div>
             <div className="leader-box">
               <div className="big">{leaderNames ? leaderNames.toUpperCase() : 'WAITING'}</div>
-              <div className="reason">{golfLeaderNames || 'Waiting for first scores'} currently leads the tournament.<br />{leader ? `${leader.player} leads the pool on current tie-breaks.` : 'Pool leaderboard will update once scores arrive.'}</div>
+              <div className="reason">{golfLeaderNames || 'Waiting for first scores'} currently leads the tournament.<br />{leaderNames ? `${leaderNames} lead the pool on current tie-breaks.` : 'Pool leaderboard will update once scores arrive.'}</div>
               <div className="leader-updated">{updatedText}</div>
             </div>
           </section>
