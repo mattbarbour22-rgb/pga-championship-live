@@ -785,9 +785,31 @@ function evaluatePool(entries, players, previousRanks) {
     return rankedWithStatus;
   }
 
-  const alive = rankedWithStatus.filter(
-    entry => !isDominated(entry, rankedWithStatus)
-  );
+  const aliveRaw = rankedWithStatus.filter(
+  entry => !isDominated(entry, rankedWithStatus)
+);
+
+let aliveLastKey = null;
+let aliveCurrentRank = 0;
+
+const alive = aliveRaw.map((entry, index) => {
+  const key = entry.sortedPicks.map(p => p.position).join('|');
+
+  if (key !== aliveLastKey) {
+    aliveCurrentRank = index + 1;
+    aliveLastKey = key;
+  }
+
+  const tieCount = aliveRaw.filter(
+    e => e.sortedPicks.map(p => p.position).join('|') === key
+  ).length;
+
+  return {
+    ...entry,
+    numericRank: aliveCurrentRank,
+    rankLabel: tieCount > 1 ? `T${aliveCurrentRank}` : String(aliveCurrentRank)
+  };
+});
 
   const eliminated = rankedWithStatus
     .filter(entry => isDominated(entry, rankedWithStatus))
