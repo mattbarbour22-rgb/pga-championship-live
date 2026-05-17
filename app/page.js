@@ -851,6 +851,8 @@ export default function Home() {
   }, [players]);
 
   const leader = pool[0];
+  const poolLeaders = pool.filter(p => p.numericRank === pool[0]?.numericRank);
+  const leaderNames = poolLeaders.map(p => p.player).join(' / ');
   const updatedText = apiState.updatedAt ? `Updated ${Math.max(0, Math.round((Date.now() - new Date(apiState.updatedAt).getTime()) / 60000))} min ago` : 'Waiting for scores';
   const golfLeaderNames = players.filter(p => p.position === players[0]?.position).map(p => p.name).join(' / ');
   const warningText = apiState.mode === 'missing-key' ? 'API key missing in Vercel. Add SLASH_GOLF_API_KEY.' : apiState.mode === 'api-error' ? `Live API fallback active: ${apiState.message}` : '';
@@ -890,7 +892,7 @@ export default function Home() {
           <section className="panel">
             <div className="panel-title">Projected Pool Leader</div>
             <div className="leader-box">
-              <div className="big">{leader?.player?.toUpperCase() || 'WAITING'}</div>
+              <div className="big">{leaderNames ? leaderNames.toUpperCase() : 'WAITING'}</div>
               <div className="reason">{golfLeaderNames || 'Waiting for first scores'} currently leads the tournament.<br />{leader ? `${leader.player} leads the pool on current tie-breaks.` : 'Pool leaderboard will update once scores arrive.'}</div>
               <div className="leader-updated">{updatedText}</div>
             </div>
