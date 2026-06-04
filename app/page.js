@@ -646,7 +646,7 @@ const eliminatedCount = pool.filter(p => p.eliminated).length;
           </section>
 
           <section className={`panel pool-panel ${poolExpanded ? 'expanded' : ''}`}>
-            <div className="panel-title">PGA Championship Pool Leaderboard</div>
+            <div className="panel-title">LIVE POOL LEADERBOARD</div>
             <table>
               <thead><tr><th>Pos</th><th>ROUND MOVE</th><th>Player</th><th>Best Pick</th><th>Next Best</th><th>3rd Pick</th></tr></thead>
               <tbody>
