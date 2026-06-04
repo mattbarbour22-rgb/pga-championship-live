@@ -320,21 +320,23 @@ function comparePickSets(a, b) {
 function isDominated(entry, allEntries) {
   const livePicks = entry.sortedPicks.filter(isLivePick);
 
-  // Current rule from PGA Championship: anyone with 3 live picks stays alive.
-  if (livePicks.length === 3) return false;
   if (livePicks.length === 0) return true;
+  if (livePicks.length === 3) return false;
 
-  return livePicks.every(winner => {
-    return allEntries.some(other => {
-      if (other.player === entry.player) return false;
-      const otherLive = other.sortedPicks.filter(isLivePick);
-      const otherHasWinner = otherLive.some(p => keyName(p.name) === keyName(winner.name));
-      if (!otherHasWinner) return false;
-      return comparePickSets(otherLive, livePicks) < 0;
-    });
+  return allEntries.some(other => {
+    if (other.player === entry.player) return false;
+
+    const otherLive = other.sortedPicks.filter(isLivePick);
+
+    const coversAllLivePicks = livePicks.every(lp =>
+      otherLive.some(op => keyName(op.name) === keyName(lp.name))
+    );
+
+    if (!coversAllLivePicks) return false;
+
+    return comparePickSets(other.sortedPicks, entry.sortedPicks) < 0;
   });
 }
-
 function rankEntries(entries, hasRealScores, previousRanks = {}) {
   let lastKey = null;
   let currentRank = 0;
