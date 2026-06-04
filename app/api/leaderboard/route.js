@@ -2,7 +2,7 @@
 // Next.js uses SECONDS here: 300 = 5 min, 900 = 15 min, 1800 = 30 min, 3600 = 1 hour.
 export const revalidate = 7200;
 
-const TOURN_ID = process.env.SLASH_GOLF_TOURN_ID || '023';
+const TOURN_ID = process.env.SLASH_GOLF_TOURN_ID || '033';
 const YEAR = process.env.SLASH_GOLF_YEAR || '2026';
 const ORG_ID = process.env.SLASH_GOLF_ORG_ID || '1';
 
