@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'U.S. Open Pick 3 Live',
+  title: 'PGA Championship Pick 3 Live',
   description: 'Live Pick 3 golf pool leaderboard for the 126th U.S. Open.'
 };
 
