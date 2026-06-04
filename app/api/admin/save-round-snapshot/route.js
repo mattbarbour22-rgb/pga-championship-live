@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { poolEntries, tournamentConfig } from '../../../lib/tournament';
 
-const TOURNAMENT_STATE_ID = process.env.TOURNAMENT_STATE_ID || '2026-us-open';
+const TOURNAMENT_STATE_ID = process.env.TOURNAMENT_STATE_ID || '2026-pga-championship';
 
 function getSupabase() {
   return createClient(
