@@ -10,7 +10,7 @@ export const tournamentConfig = {
   dates: 'May 14–17, 2026',
   prizePool: '$1,750',
   tournamentTimezone: 'America/New_York',
-  jackpotRule: 'To win, your picks must include the outright PGA Champion. If no entry has the winner, the prize jackpots again.',
+  jackpotRule: 'To win, your picks must include the outright PGA Championship winner. If no entry has the winner, the prize jackpots.',
   heroImage: 'https://images.unsplash.com/photo-1592919505780-303950717480?auto=format&fit=crop&w=2400&q=80'
 };
 
