@@ -53,34 +53,14 @@ tr:nth-child(even) td { background: #f8fafc; }
 
 .leader-box {
   padding: 26px;
-  background: rgba(255,255,255,0.22);
+  background:
+    linear-gradient(100deg, rgba(5,18,34,.90) 0%, rgba(5,18,34,.74) 52%, rgba(5,18,34,.52) 100%),
+    var(--hero-image);
+  background-size: cover;
+  background-position: center;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255,255,255,0.22);
 }
 
-.big { font-size: 54px; font-weight: 950; color: white; line-height: 1; text-shadow: 0 4px 16px rgba(0,0,0,.5); }
-.reason { margin-top: 12px; font-size: 20px; line-height: 1.45; color: #f8fafc; text-shadow: 0 2px 8px rgba(0,0,0,.45); }
-.leader-updated { margin-top: 18px; font-size: 16px; color: #f8fafc; line-height: 1.45; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,.45); }
-.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
-.stat-row div { background: rgba(255,255,255,0.84); border: 1px solid rgba(227,218,199,.75); border-radius: 8px; padding: 12px; }
-.stat-row strong { display: block; color: var(--navy); font-size: 28px; line-height: 1; }
-.stat-row span { display: block; color: #334155; font-size: 12px; text-transform: uppercase; font-weight: 900; margin-top: 6px; }
-.note { margin-top: 18px; background: rgba(7,23,45,.92); border: 1px solid rgba(217,199,161,.35); padding: 16px 18px; font-size: 15px; color: #e5e7eb; line-height: 1.45; border-radius: 8px; text-align: center; }
-.move-up { color: #15803d; font-weight: 900; white-space: nowrap; }
-.move-down { color: #b91c1c; font-weight: 900; white-space: pre-line; }
-.move-same { color: #64748b; font-weight: 900; white-space: nowrap; }
-.eliminated-row td { opacity: .48; background: #e5e7eb !important; }
-.eliminated-row .move-down { opacity: 1; color: #991b1b; font-weight: 900; font-size: .72rem; }
-
-@media(max-width:1000px) {
-  .page { padding: 18px; }
-  .grid { grid-template-columns: 1fr; }
-  .title h2 { font-size: 40px; }
-  .subtitle { font-size: 18px; }
-  .header { flex-direction: column; }
-  .logo { border-right: 0; text-align: left; }
-  .big { font-size: 34px; }
-  .stat-row { grid-template-columns: 1fr; }
-  td, th { font-size: 12px; padding: 9px; }
-}
+.big { font-size: 54px; font-weight: 950; color: white; line-height: 1; text-shadow: 0 4px 16px rgba(0,0,0,.65); }
