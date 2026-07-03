@@ -53,14 +53,10 @@ tr:nth-child(even) td { background: #f8fafc; }
 
 .leader-box {
   padding: 26px;
-  background:
-    linear-gradient(100deg, rgba(5,18,34,.90) 0%, rgba(5,18,34,.74) 52%, rgba(5,18,34,.52) 100%),
-    var(--hero-image);
-  background-size: cover;
-  background-position: center;
+  background: rgba(255,255,255,0.22);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255,255,255,0.22);
 }
 
-.big { font-size: 54px; font-weight: 950; color: white; line-height: 1; text-shadow: 0 4px 16px rgba(0,0,0,.65); }
+.big { font-size: 54px; font-weight: 950; color: white; line-height: 1; text-shadow: 0 4px 16px rgba(0,0,0,.5); }
