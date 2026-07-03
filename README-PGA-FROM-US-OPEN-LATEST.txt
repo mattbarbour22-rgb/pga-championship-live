@@ -1,0 +1,1 @@
+PGA Championship app rebuilt from the latest live U.S. Open codebase. Keeps original PGA tournament.js including pool entrants/picks, course, dates, prize pool, labels and wording. Latest MC/WD/elimination/covered-by/snapshot/status logic included.
