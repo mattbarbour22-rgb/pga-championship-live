@@ -100,52 +100,31 @@ function isWithdrawnOrCutLabel(label) {
 
 function applyRoundTwoCut(players, payload) {
   const roundId = roundIdNumber(payload?.roundId);
-  const roundStatus = String(payload?.roundStatus || '').toLowerCase();
+  const roundStatus = String(payload?.roundStatus || "").toLowerCase();
 
-  // Only force the cut after Round 2 has officially finished.
-  // Before that, everyone should remain live.
-  if (roundId !== 2 || roundStatus !== 'official') return players;
+  // Only after Round 2 is officially complete.
+  if (roundId !== 2 || roundStatus !== "official") {
+    return players;
+  }
 
-  const activePositions = players
-    .filter(p => Number(p.position) < 999)
-    .map(p => Number(p.position))
-    .filter(Number.isFinite);
+  return players.map((p) => {
+    const label = String(p.positionLabel || "").trim().toUpperCase();
 
-  if (!activePositions.length) return players;
-
-  // Standard PGA-style cut is top 65 and ties.
-  // Example: if positions are 1,2,2,...,61,61,76, the cut position becomes 61.
-  const cutPosition =
-    Math.max(...activePositions.filter(pos => pos <= 65)) || 65;
-
-  return players.map(p => {
-    const label = String(p.positionLabel || '').trim().toUpperCase();
-
-    // Preserve WD/DQ/CUT/MC if the API already says so.
-    if (isWithdrawnOrCutLabel(label)) {
+    // Only honour MC/CUT/WD/DQ if the API explicitly sends them.
+    if (["MC", "CUT", "WD", "DQ"].includes(label)) {
       return {
         ...p,
         position: 999,
-        positionLabel: label === 'CUT' ? 'MC' : label,
+        positionLabel: label === "CUT" ? "MC" : label,
         score: 999,
-        thru: p.thru || '-'
+        thru: label === "MC" ? "MC" : p.thru,
       };
     }
 
-    if (Number(p.position) > cutPosition) {
-      return {
-        ...p,
-        position: 999,
-        positionLabel: 'MC',
-        score: 999,
-        thru: 'MC'
-      };
-    }
-
+    // Leave everyone else exactly as returned by SlashGolf.
     return p;
   });
 }
-
 
 export async function GET() {
   const key = process.env.SLASH_GOLF_API_KEY;
