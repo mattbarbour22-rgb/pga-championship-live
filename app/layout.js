@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'PGA Chamionship Pick 3 Live',
+  title: 'PGA Championship Pick 3 Live',
   description: 'Live Pick 3 golf pool leaderboard for the PGA Championship.'
 };
 
